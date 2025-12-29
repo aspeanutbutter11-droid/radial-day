@@ -278,6 +278,13 @@ export default function RadialDayPrototype() {
     "dev";
   const buildShort = typeof buildId === "string" ? buildId.slice(0, 7) : "dev";
 
+  // Human version (you control this)
+  const appVersion =
+    (typeof import.meta !== "undefined" &&
+      import.meta?.env &&
+      (import.meta.env.VITE_APP_VERSION || import.meta.env.VITE_VERSION)) ||
+    "0.0";
+
   // Basic stacking: keep blocks sorted by start.
   const sortedBlocks = useMemo(() => {
     return [...blocks].sort((a, b) => a.startMin - b.startMin);
@@ -808,6 +815,10 @@ export default function RadialDayPrototype() {
               <div className="mt-1 flex items-center justify-between">
                 <span className="text-white/60">Session start</span>
                 <span className="font-semibold">{startClock}</span>
+              </div>
+              <div className="mt-1 flex items-center justify-between">
+                <span className="text-white/60">Version</span>
+                <span className="font-semibold">{appVersion}</span>
               </div>
               <div className="mt-1 flex items-center justify-between">
                 <span className="text-white/60">Build</span>
